@@ -70,6 +70,14 @@ For full up to date instructions on any of these kind installation methods, see 
 
 Once all these components are installed, we are ready to create our local Kubernetes cluster.
 
+Kind deploys a Kubernetes instance in a docker container, if you have other containers running on your system, it is best to stop them as they may conflict with the ports used in this example.
+
+`docker ps` will show you any containers running already, if there are any you can stop them all at once using:
+
+```bash
+docker stop $(docker ps -a -q)
+```
+
 First we need a little configuration to prepare our new Kubernetes node. Make a file as below:
 
 ```yaml
@@ -251,13 +259,13 @@ Now you have your service up and running. Lets see it in a browser, open up the 
 
 > "But I want a custom page of my own design"
 
-ok, no problem. Lets add our own custom html page to the deployment.
+Ok, no problem. Lets add our own custom html page to the deployment.
 
 The typical way custom content reaches a Kubernetes cluster is by publishing a container with the content bundled to a registry. Many exist such as dockerhub.com, AWS's ECR (Elastic Container Registry), Google's container registry or even a self hosted registry. All of these are outside the scope of this article so we are going to pass content into the existing nginx container with a Kubernetes resource called a configmap.
 
 These resources are a useful way for passing in config files to processes in pods, but in this case, we're going to use one to supply a replacement index.html file to the nginx default `/usr/share/nginx/html` web server file path.
 
-For convenience there is a html file in the `html/` folder in the git repository. add the config map using this command.
+For convenience there is a html file in the `html/` folder in the git repository. Add the config map using this command.
 
 ```bash
 kubectl create configmap index.html --from-file html/index.html
