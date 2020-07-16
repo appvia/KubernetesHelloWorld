@@ -172,10 +172,9 @@ These logs show scripts that run when the container starts up, we will re-visit 
 
 So the process is running, how do we visit the page? Kubernetes offers a powerful service layer to route connections to containers it runs. When you run your pod, you need to specify the ports that it will map onto your container. Then you create a Kubernetes resource called a "Service" that will direct requests to processes running in your pods.
 
-So how do you do this. First lets add the port definitions to the Deployment Pod specification. Add the lines below to your yaml file:S
+So how do you do this. First lets add the port definitions to the Deployment Pod specification. Replace the spec block from your yaml file with the lines below:
 
 ```yaml
-  ...
     spec:
       containers:
       - image: nginx:latest
@@ -185,7 +184,7 @@ So how do you do this. First lets add the port definitions to the Deployment Pod
           name: nginx
 ```
 
-Then apply this file as you did before, for convenience in the git repository we have an example of the file:SS
+Then apply this file as you did before, for convenience in the git repository we have an example of the file:
 
 ```bash
 kubectl apply -f manifests/2_helloworld_deploy_ports.yaml
@@ -274,7 +273,6 @@ Now we just need to tell the nginx Pod to read from this configmap for its conte
 Update your yaml file with the new content below at the end of the file:
 
 ```yaml
-...
         volumeMounts:
         - name: htmlcontent
           mountPath: "/usr/share/nginx/html/"
