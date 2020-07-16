@@ -311,7 +311,7 @@ Finally you can view the updated content on our `localhost` page in your browser
 
 ## Set your own text
 
-Now for your own enjoyment, try updating the `images/index.html` file with your own text. Update the configmap with your new content, this requires a little command line trickery, but with the following command you can replace the existing configmap content with your new index.html file content.
+Now for your own enjoyment, try updating the `html/index.html` file with your own text. Update the configmap with your new content, this requires a little command line trickery, but with the following command you can replace the existing configmap content with your new index.html file content.
 
 ```bash
 kubectl create configmap index.html --from-file html/index.html -oyaml --dry-run | kubectl replace -f -
