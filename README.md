@@ -205,20 +205,21 @@ Now that the pod is setup to receive requests on the port we want, we need to cr
 1. The preferred method, you can use a service defined in a yaml file, which should look like this:
 
   ```yaml
-  apiVersion: v1
-  kind: Service
-  metadata:
-    name: example1
-    labels:
-      app: example1
-  spec:
-    type: NodePort
-    selector:
-      app: nginx
-    ports:
-      - protocol: TCP
-        port: 80
-        targetPort: 80
+apiVersion: v1
+kind: Service
+metadata:
+  name: example1
+  labels:
+    app: example1
+spec:
+  type: NodePort
+  selector:
+    app: example1
+  ports:
+    - protocol: TCP
+      targetPort: 80
+      port: 80
+      nodePort: 30080
   ```
 
   Again an example is provided in the git repo, so you can apply the example manifest or your own file like so:  
