@@ -250,8 +250,6 @@ Now you have your service up and running. Lets see it in a browser, open up the 
 
 ok, no problem. Lets add our own custom html page to the deployment.
 
-_*TODO: figure out easy way to create custom content, can you deploy containers directly from local docker instance? local registry? ~inline code~(prefer not this)?*_
-
 The typical way custom content reaches a kubernetes cluster is by publishing a container with the content bundled to a registry. Many exist such as dockerhub.com, AWS's ECR (Elastic Container Registry), Google's container registry or even a self hosted registry. All of these are outside the scope of this article so we are going to pass content into the existing nginx container with a Kubernetes resource called a configmap.
 
 These resources are a useful way for passing in config files to processes in pods, but in this case, we're going to use one to supply a replacement index.html file to the nginx default `/usr/share/nginx/html` web server file path.
