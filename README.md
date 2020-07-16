@@ -202,7 +202,7 @@ The "Terminating" instance maybe visible for a very short time, otherwise you wi
 
 Now that the pod is setup to receive requests on the port we want, we need to create the Service. To do this you can do this 1 of 2 ways:
 
-* The preferred method, you can use a service defined in a yaml file, which should look like this:
+1. The preferred method, you can use a service defined in a yaml file, which should look like this:
 
   ```yaml
   apiVersion: v1
@@ -227,13 +227,13 @@ Now that the pod is setup to receive requests on the port we want, we need to cr
   kubectl apply -f manifests/3_helloworld_service.yaml
   ```
 
-* Otherwise Use the kubectl command to "expose" a service. In our case, since we are mapping extra ports in `kind` it can cause a conflict in the ports assigned to our NodePort, so it's not ideal for our example. But for completeness of the explanation, this is a simple method useful in other circumstances and looks like this:
+2. Otherwise use the kubectl command to "expose" a service. In our case, since we are mapping extra ports in `kind` it can cause a conflict in the ports assigned to our NodePort, so it's not ideal for our example. But for completeness of the explanation, this is a simple method useful in other circumstances and looks like this:
 
   ```bash
   kubectl expose deployment example1
   ```
 
-once you've done this you should see the service if you get services:
+Once you've done this you should see the service if you get services:
 
 ```bash
  $> kubectl get services
