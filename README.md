@@ -208,39 +208,31 @@ example1-9f8f59464-x9ntp    1/1     Running       0          2s
 
 The "Terminating" instance maybe visible for a very short time, otherwise you will just see the new pod already Running without the old pod in Terminating state. This is how deployments are update in Kubernetes, allowing for rolling upgrades of configuration or container versions.
 
-Now that the pod is setup to receive requests on the port we want, we need to create the Service. To do this you can do this 1 of 2 ways:
+Now that the pod is setup to receive requests on the port we want, we need to create the Service. We'll use the generally preferred method, create a service defined in a yaml file, which should look like this:
 
-1. The preferred method, you can use a service defined in a yaml file, which should look like this:
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: example1
+  labels:
+    app: example1
+spec:
+  type: NodePort
+  selector:
+    app: example1
+  ports:
+    - protocol: TCP
+      targetPort: 80
+      port: 80
+      nodePort: 30080
+```
 
-  ```yaml
-  apiVersion: v1
-  kind: Service
-  metadata:
-    name: example1
-    labels:
-      app: example1
-  spec:
-    type: NodePort
-    selector:
-      app: example1
-    ports:
-      - protocol: TCP
-        targetPort: 80
-        port: 80
-        nodePort: 30080
-  ```
+Again an example is provided in the git repo, so you can apply the example manifest or your own file like so:  
 
-  Again an example is provided in the git repo, so you can apply the example manifest or your own file like so:  
-
-  ```bash
-  kubectl apply -f manifests/3_helloworld_service.yaml
-  ```
-
-2. Otherwise use the kubectl command to "expose" a service. In our case, since we are mapping extra ports in `kind` it can cause a conflict in the ports assigned to our NodePort, so it's not ideal for our example. But for completeness of the explanation, this is a simple method useful in other circumstances and looks like this:
-
-  ```bash
-  kubectl expose deployment example1
-  ```
+```bash
+kubectl apply -f manifests/3_helloworld_service.yaml
+```
 
 Once you've done this you should see the service if you get services:
 
