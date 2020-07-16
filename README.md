@@ -239,7 +239,10 @@ Once you've done this you should see the service if you get services:
  $> kubectl get services
 NAME         TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)        AGE
 example1     NodePort    10.97.195.99   <none>        80:30080/TCP   4s
+kubernetes   ClusterIP   10.96.0.1      <none>        443/TCP        15m
 ```
+
+You will notice 2 services, your example1 and the kubernetes service, this is normal, kind exposes the service you are using to communicate with the cluster in this way.
 
 Now you have your service up and running. Lets see it in a browser, open up the url to `http://localhost` and hit enter, you should see something like this
 
