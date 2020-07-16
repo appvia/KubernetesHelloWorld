@@ -252,6 +252,87 @@ ok, no problem. Lets add our own custom html page to the deployment.
 
 _*TODO: figure out easy way to create custom content, can you deploy containers directly from local docker instance? local registry? ~inline code~(prefer not this)?*_
 
+The typical way custom content reaches a kubernetes cluster is by publishing a container with the content bundled to a registry. Many exist such as dockerhub.com, AWS's ECR (Elastic Container Registry), Google's container registry or even a self hosted registry. All of these are outside the scope of this article so we are going to pass content into the existing nginx container with a Kubernetes resource called a configmap.
+
+These resources are a useful way for passing in config files to processes in pods, but in this case, we're going to use one to supply a replacement index.html file to the nginx default `/usr/share/nginx/html` web server file path.
+
+For convenience there is a html file in the `html/` folder in the git repository. add the config map using this command.
+
+```bash
+kubectl create configmap index.html --from-file html/index.html
+```
+
+You can see it created successfully using the command `kubectl get configmaps` which should show the result below:
+
+```text
+NAME         DATA   AGE
+index.html   1      33s
+```
+
+To see what is in the configmap for your own curiosity, you can run `kubectl describe configmap index.html`.
+
+Now we just need to tell the nginx Pod to read from this configmap for its content. Lets update the deployment file one more time to add a Volume mount, essentially treating the content of the content map like a mountable file inside the file system of the nginx container.
+
+Update your yaml file with the new content below at the end of the file:
+
+```yaml
+...
+        volumeMounts:
+        - name: htmlcontent
+          mountPath: "/usr/share/nginx/html/"
+          readOnly: true
+      volumes:
+      - name: htmlcontent
+        configMap:
+          name: index.html
+          items:
+          - key: index.html
+            path: index.html
+```
+
+..or use the file in the git repository and apply the change to your deployment with the command as below.
+
+```bash
+kubectl apply -f manifests/4_helloworld_deploy_content.yaml
+```
+
+Finally we will see the deployment update which can be done with `kubectl get pods` which again we can see a Terminating pod being replaced with a new Pod.
+
+```text
+NAME                        READY   STATUS        RESTARTS   AGE
+example1-587454c8fb-4llk9   1/1     Terminating   0          177m
+example1-566dd9577f-j48bh   1/1     Running       0          2s
+```
+
+Finally you can view the updated content on our `localhost` page in your browser and see the lovely
+ branded helloworld page.
+
+![Kubernetes Appvia Hello world](images/3_Kubernetes-Appvia-Hello-World.png)
+
+## Set your own text
+
+Now for your own enjoyment, try updating the `images/index.html` file with your own text. Update the configmap with your new content, this requires a little command line trickery, but with the following command you can replace the existing configmap content with your new index.html file content.
+
+```bash
+kubectl create configmap index.html --from-file html/index.html -oyaml --dry-run | kubectl replace -f -
+```
+
+To get the nginx Pod to reload mounting the new value of the configmap, you need to get the pod to recreate. Do this using the following command:
+
+```bash
+kubectl rollout restart deployment example1
+```
+
+This will tell the deployment to re-deploy it's pod's, so if you do `kubectl get pods` again, you will see the rolling change happening.
+
+```text
+NAME                        READY   STATUS              RESTARTS   AGE
+example1-566dd9577f-j48bh   1/1     Running             0          14m
+example1-78df6fc9ff-l98cg   0/1     ContainerCreating   0          3s
+```
+
+Reload your browser and you will see your clever and witty message!
+
 ## Cleanup
 
 When you are all done with your test cluster, you can clean it up easily with the following command.
