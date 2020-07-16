@@ -2,7 +2,7 @@
 
 You've heard of Kubernetes, but you have never used it and don't know what it can do? Then start here, in this article we will step through setting up your first cluster on your own computer (laptop or desktop computer), and deploy a simple application into the cluster.
 
-Setting a local Kubernetes cluster is made extremely simple today with the wide availability of tools like minikube, mikrok8s, kind and many others besides these, so for this tutorial we'll use kind, as it is the fastest to setup with minimal dependencies as long as you can run docker on your machine.
+Setting a local Kubernetes cluster is made extremely simple today with the wide availability of tools like Minikube, Mikrok8s, Kind and many others besides these, so for this tutorial we'll use `kind`, as it is the fastest to setup with minimal dependencies as long as you can run docker on your machine.
 
 To make things easier you can clone the examples and this article in our public git repository [Kubernetes Hello World](https://github.com/appvia/KubernetesHelloWorld)
 
@@ -12,16 +12,16 @@ To make things easier you can clone the examples and this article in our public 
 
 #### Docker
 
-To get kind working you will need docker installed.
+To get `kind` working you will need docker installed.
 
-* On linux it is best to use your operating system package manager, `apt` on ubuntu or debian, `yum` or `dnf` on fedora/centos/rhel and `pacman` or `yay` on archlinux.
-* On Mac or windows use the instructions for your platform [here - docker/get-docker](https://docs.docker.com/get-docker/)
+* On Linux it is best to use your operating system package manager, `apt` on ubuntu or debian, `yum` or `dnf` on Fedora/Centos/RHEL and `pacman` or `yay` on Archlinux.
+* On Mac or Windows use the instructions for your platform [here - docker/get-docker](https://docs.docker.com/get-docker/)
 
 #### Kubectl
 
 You will also need the `kubectl` command to interact with the cluster once it's up and running.
 
-* On linux install the [kubectl install instructions](https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl-on-linux) are available, including methods to install it with your Linux distributions' packages manager, but it can be installed easily with the following commands:
+* On Linux install the [kubectl install instructions](https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl-on-linux) are available, including methods to install it with your Linux distributions' packages manager, but it can be installed easily with the following commands:
 
   ```bash
   curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt` /bin/linux/amd64/kubectl
@@ -29,15 +29,15 @@ You will also need the `kubectl` command to interact with the cluster once it's 
   sudo mv ./kubectl /usr/local/bin/kubectl
   ```
 
-* On a mac, it should be easy if you use the `brew` package manager, just run `brew install kubectl`. Further instructions for MacOs are available here in [kubernetes mac os kubectl installation instructions](https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl-on-macos)
-* On windows, of course are also available on [the kubernetes kubectl installation instructions page](https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl-on-windows)
+* On a Mac, it should be easy if you use the `brew` package manager, just run `brew install kubectl`. Further instructions for MacOs are available here in [Kubernetes MacOs kubectl installation instructions](https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl-on-macos)
+* On Windows, of course are also available on the [Kubernetes kubectl installation instructions page](https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl-on-windows)
  *TODO*  _Does it come with the windows docker installer?_
 
 #### KIND
 
 Finally, you will need to get the `kind` command.
 
-* On linux or Mac you can install it from the projects [github releases page](https://github.com/kubernetes-sigs/kind/releases), much like the kubectl binary, with these commands:
+* On Linux or Mac you can install it from the projects [github releases page](https://github.com/kubernetes-sigs/kind/releases), much like the `kubectl` binary, with these commands:
   
   ```bash
   curl -L https://github.com/kubernetes-sigs/kind/releases/download/v0.8.1/kind-linux-amd64 -o kind
@@ -45,13 +45,13 @@ Finally, you will need to get the `kind` command.
   sudo mv ./kind /usr/local/bin/kind
   ```
 
-* on a mac, alternatively it can be installed easily using the `brew` command again, with:
+* on a Mac, alternatively it can be installed easily using the `brew` command again, with:
 
   ```bash
   brew install kind
   ```
 
-* On windows either use curl if you have it available:
+* On Windows either use curl if you have it available:
 
   ```bash
   curl.exe -Lo kind-windows-amd64.exe https://kind.sigs.k8s.io/dl/v0.8.1/kind-windows-amd64
@@ -68,9 +68,9 @@ For full up to date instructions on any of these kind installation methods, see 
 
 ## Create the cluster
 
-Once all these components are installed, we are ready to create our local kubernetes cluster.
+Once all these components are installed, we are ready to create our local Kubernetes cluster.
 
-First we need a little configuration to prepare our new kubernetes node. Make a file as below:
+First we need a little configuration to prepare our new Kubernetes node. Make a file as below:
 
 ```yaml
 # Save this to 'kind.config.yaml'
@@ -146,7 +146,7 @@ example1-7466b89f7c-cs4cc   1/1     Running   0          14s
 
 If the "STATUS" field says "Running" it's working as expected. So what actually happened?
 
-When you create a deployment in kubernetes, the number of replicas you want is set in the manifest, each replica is a copy of the containers that are in the spec. This running instance is actually in an object called a "Pod". A Pod is one or more containers running in a logical group. This allows for a number of useful arrangements, like using multiple processes to deal with processing batch jobs, shipping logs or metrics, or a processes called "initContainers" that runs once to help setup the "Pod" for operation.
+When you create a deployment in Kubernetes, the number of replicas you want is set in the manifest, each replica is a copy of the containers that are in the spec. This running instance is actually in an object called a "Pod". A Pod is one or more containers running in a logical group. This allows for a number of useful arrangements, like using multiple processes to deal with processing batch jobs, shipping logs or metrics, or a processes called "initContainers" that runs once to help setup the "Pod" for operation.
 
 In our case we are just running the container for nginx on it's own, no need for any more. The Pod contains our single nginx instance as we intended. We can see the logs of the container as if it were running locally using the following command.
 
@@ -170,7 +170,7 @@ These logs show scripts that run when the container starts up, we will re-visit 
 
 ## Expose the service
 
-So the process is running, how do we visit the page? Kubernetes offers a powerful service layer to route connections to containers it runs. When you run your pod, you need to specify the ports that it will map onto your container. Then you create a kubernetes resource called a "Service" that will direct requests to processes running in your pods.
+So the process is running, how do we visit the page? Kubernetes offers a powerful service layer to route connections to containers it runs. When you run your pod, you need to specify the ports that it will map onto your container. Then you create a Kubernetes resource called a "Service" that will direct requests to processes running in your pods.
 
 So how do you do this. First lets add the port definitions to the Deployment Pod specification. Add the lines below to your yaml file:S
 
@@ -228,7 +228,7 @@ Now that the pod is setup to receive requests on the port we want, we need to cr
   kubectl apply -f manifests/3_helloworld_service.yaml
   ```
 
-* Otherwise Use the kubectl command to "expose" a service. In our case, since we are mapping extra ports in kind it can cause a conflict in the ports assigned to our NodePort, so it's not ideal for our example. But for completeness of the explanation, this is a simple method useful in other circumstances and looks like this:
+* Otherwise Use the kubectl command to "expose" a service. In our case, since we are mapping extra ports in `kind` it can cause a conflict in the ports assigned to our NodePort, so it's not ideal for our example. But for completeness of the explanation, this is a simple method useful in other circumstances and looks like this:
 
   ```bash
   kubectl expose deployment example1
@@ -250,7 +250,7 @@ Now you have your service up and running. Lets see it in a browser, open up the 
 
 ok, no problem. Lets add our own custom html page to the deployment.
 
-The typical way custom content reaches a kubernetes cluster is by publishing a container with the content bundled to a registry. Many exist such as dockerhub.com, AWS's ECR (Elastic Container Registry), Google's container registry or even a self hosted registry. All of these are outside the scope of this article so we are going to pass content into the existing nginx container with a Kubernetes resource called a configmap.
+The typical way custom content reaches a Kubernetes cluster is by publishing a container with the content bundled to a registry. Many exist such as dockerhub.com, AWS's ECR (Elastic Container Registry), Google's container registry or even a self hosted registry. All of these are outside the scope of this article so we are going to pass content into the existing nginx container with a Kubernetes resource called a configmap.
 
 These resources are a useful way for passing in config files to processes in pods, but in this case, we're going to use one to supply a replacement index.html file to the nginx default `/usr/share/nginx/html` web server file path.
 
