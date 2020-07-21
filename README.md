@@ -6,7 +6,7 @@ Setting up a local Kubernetes cluster is incredibly simple these days, thanks to
 
 To make things easier you can clone the examples and this article in our public git repository [Kubernetes Hello World](https://github.com/appvia/KubernetesHelloWorld)
 
-## KIND setup
+## KIND set up
 
 ### Requirements (dependencies)
 
@@ -109,7 +109,7 @@ As the output says, the cluster is up and your `kubectl` command configuration i
 
 Now that we have a cluster up and running, we can run a process. We will run a simple webserver with a "hello world" message of our own creation.
 
-Kubernetes describes all workloads through a simple yaml format file called a "manifest". So to setup something on our cluster we need to write a yaml file to describe what we want to run.
+Kubernetes describes all workloads through a simple yaml format file called a "manifest". So to set up something on our cluster we need to write a yaml file to describe what we want to run.
 
 All the manifests for this example deployment can be found in the repository under the `manifests` folder.
 
@@ -153,7 +153,7 @@ example1-7466b89f7c-cs4cc   1/1     Running   0          14s
 
 If the "STATUS" field says "Running" it's working as expected. So what actually happened?
 
-When you create a deployment in Kubernetes, the number of replicas you want is set in the manifest, each replica is a copy of the containers that are in the spec. This running instance is actually in an object called a "Pod". A Pod is one or more containers running in a logical group. This allows for a number of useful arrangements, like using multiple processes to deal with processing batch jobs, shipping logs or metrics, or a processes called "initContainers" that runs once to help setup the "Pod" for operation.
+When you create a deployment in Kubernetes, the number of replicas you want is set in the manifest, each replica is a copy of the containers that are in the spec. This running instance is actually in an object called a "Pod". A Pod is one or more containers running in a logical group. This allows for a number of useful arrangements, like using multiple processes to deal with processing batch jobs, shipping logs or metrics, or a processes called "initContainers" that runs once to help set up the "Pod" for operation.
 
 In our case we are just running the container for nginx on it's own, no need for any more. The Pod contains our single nginx instance as we intended. We can see the logs of the container as if it were running locally using the following command.
 
@@ -207,7 +207,7 @@ example1-9f8f59464-x9ntp    1/1     Running       0          2s
 
 The "Terminating" instance maybe visible for a very short time, otherwise you will just see the new pod already Running without the old pod in Terminating state. This is how deployments are update in Kubernetes, allowing for rolling upgrades of configuration or container versions.
 
-Now that the pod is setup to receive requests on the port we want, we need to create the Service. We'll use the generally preferred method, create a service defined in a yaml file, which should look like this:
+Now that the pod is set up to receive requests on the port we want, we need to create the Service. We'll use the generally preferred method, create a service defined in a yaml file, which should look like this:
 
 ```yaml
 apiVersion: v1
