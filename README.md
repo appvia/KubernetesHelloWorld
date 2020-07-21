@@ -342,3 +342,6 @@ kind delete cluster --name mycluster
 
 This deletes the docker container that is running your cluster, and thankfully clears up the kubectl config file for you too so you don't have to worry about cleaning up your home .kube/config file.
 
+## Next Steps
+
+Carry on learning about kubernetes and checkout the Appvia blog, a good starting point is the [Intro guide to Kubernetes](https://www.appvia.io/blog/intro-guide-to-kubernetes
