@@ -1,8 +1,8 @@
 # Your first Kubernetes cluster
 
-You've heard of Kubernetes, but you have never used it and don't know what it can do? Then start here, in this article we will step through setting up your first cluster on your own computer (laptop or desktop computer), and deploy a simple application into the cluster.
+Maybe you’ve heard of Kubernetes but haven’t explored it any further or you’ve done a bit of research but have yet to test the waters of what it can do. Either way, this step-by-step guide will walk you through setting up a Kubernetes cluster on your own computer and deploy a simple application into the cluster. 
 
-Setting a local Kubernetes cluster is made extremely simple today with the wide availability of tools like Minikube, Mikrok8s, Kind and many others besides these, so for this tutorial we'll use `kind`, as it is the fastest to setup with minimal dependencies as long as you can run docker on your machine.
+Setting up a local Kubernetes cluster is incredibly simple these days, thanks to the wide availability of tools like Minikube, Mikrok8s, Kind etc… In this tutorial we’ll use `kind` because it’s the fastest to set up with minimal dependencies - as long as you can run docker on your machine. 
 
 To make things easier you can clone the examples and this article in our public git repository [Kubernetes Hello World](https://github.com/appvia/KubernetesHelloWorld)
 
@@ -30,8 +30,7 @@ You will also need the `kubectl` command to interact with the cluster once it's 
   ```
 
 * On a Mac, it should be easy if you use the `brew` package manager, just run `brew install kubectl`. Further instructions for MacOs are available here in [Kubernetes MacOs kubectl installation instructions](https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl-on-macos)
-* On Windows, of course are also available on the [Kubernetes kubectl installation instructions page](https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl-on-windows)
- *TODO*  _Does it come with the windows docker installer?_
+* On Windows, of course instructions are also available on the [Kubernetes kubectl installation instructions page](https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl-on-windows)
 
 #### KIND
 
@@ -45,7 +44,7 @@ Finally, you will need to get the `kind` command.
   sudo mv ./kind /usr/local/bin/kind
   ```
 
-* on a Mac, alternatively it can be installed easily using the `brew` command again, with:
+* On a Mac, alternatively it can be installed easily using the `brew` command again, with:
 
   ```bash
   brew install kind
@@ -323,7 +322,7 @@ To get the nginx Pod to reload mounting the new value of the configmap, you need
 kubectl rollout restart deployment example1
 ```
 
-This will tell the deployment to re-deploy it's pod's, so if you do `kubectl get pods` again, you will see the rolling change happening.
+This will tell the deployment to re-deploy its pods, so if you do `kubectl get pods` again, you will see the rolling change happening.
 
 ```text
 NAME                        READY   STATUS              RESTARTS   AGE
@@ -343,8 +342,3 @@ kind delete cluster --name mycluster
 
 This deletes the docker container that is running your cluster, and thankfully clears up the kubectl config file for you too so you don't have to worry about cleaning up your home .kube/config file.
 
-## Next steps
-
-If you want to explore more advanced topics...
-
-_TODO: next article suggestions, or external links
