@@ -24,7 +24,7 @@ You will also need the `kubectl` command to interact with the cluster once it's 
 * On Linux install the [kubectl install instructions](https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl-on-linux) are available, including methods to install it with your Linux distributions' packages manager, but it can be installed easily with the following commands:
 
   ```bash
-  curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt` /bin/linux/amd64/kubectl)
+  curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt` /bin/linux/amd64/kubectl
   chmod +x ./kubectl
   sudo mv ./kubectl /usr/local/bin/kubectl
   ```
@@ -344,4 +344,4 @@ This deletes the docker container that is running your cluster, and thankfully c
 
 ## Next Steps
 
-Carry on learning about kubernetes and checkout the Appvia blog, a good starting point is the [Intro guide to Kubernetes](https://www.appvia.io/blog/intro-guide-to-kubernetes
+Carry on learning about kubernetes and checkout the Appvia blog, a good starting point is the [Intro guide to Kubernetes](https://www.appvia.io/blog/intro-guide-to-kubernetes)
