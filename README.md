@@ -15,7 +15,7 @@ To make things easier you can clone the examples and this article in our public 
 To get `kind` working you will need docker installed.
 
 * On Linux it is best to use your operating system package manager, `apt` on ubuntu or debian, `yum` or `dnf` on Fedora/Centos/RHEL and `pacman` or `yay` on Archlinux.
-* On Mac or Windows use the instructions for your platform [here - docker/get-docker](https://docs.docker.com/get-docker/)
+* On Mac or Windows use the instructions for your platform on [dockers documentation](https://docs.docker.com/get-docker/)
 
 #### Kubectl
 
