@@ -2,7 +2,7 @@
 
 Maybe you’ve heard of Kubernetes but haven’t explored it any further or you’ve done a bit of research but have yet to test the waters of what it can do. Either way, this step-by-step guide will walk you through setting up a Kubernetes cluster on your own computer and deploy a simple application into the cluster. 
 
-Setting up a local Kubernetes cluster is incredibly simple these days, thanks to the wide availability of tools like Minikube, Mikrok8s, Kind etc… In this tutorial we’ll use `kind` because it’s the fastest to set up with minimal dependencies - as long as you can run docker on your machine. 
+Setting up a local Kubernetes cluster is incredibly simple these days, thanks to the wide availability of tools like [Minikube](https://minikube.sigs.k8s.io/docs/start/), [Mikrok8s](https://microk8s.io/), [Kind](https://kind.sigs.k8s.io/docs/user/quick-start/) etc… In this tutorial we’ll use `kind` because it’s the fastest to set up with minimal dependencies - as long as you can run docker on your machine. 
 
 To make things easier you can clone the examples and this article in our public git repository [Kubernetes Hello World](https://github.com/appvia/KubernetesHelloWorld)
 
