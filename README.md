@@ -230,7 +230,6 @@ spec:
     - protocol: TCP
       targetPort: 80
       port: 80
-      nodePort: 30080
 ```
 
 Again an example is provided in the git repo, so you can apply the example manifest or your own file like so:  
@@ -253,6 +252,60 @@ You will notice 2 services, your example1 and the kubernetes service, this is no
 Now you have your service up and running. Lets see it in a browser, open up the url to `http://localhost` and hit enter, you should see something like this
 
 ![Welcome to nginx!](./images/2_Welcome-to-nginx.png)
+
+
+## Expose using Ingress
+
+In order to expose the service using Ingress, you need to create a Kubernetes resource called an "Ingress" that will direct requests to the service.
+
+Run the following command:
+
+```bash
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml
+```
+After a few minutes you should be able to create ingress resource using following:
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: example1
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /testpath
+        pathType: Prefix
+        backend:
+          service:
+            name: example1
+            port:
+              number: 80
+```
+
+Or you can apply using the following command:
+
+```bash
+kubectl apply -f manifests/5_helloworld_ingress.yaml
+```
+
+In the browser access the following URL:
+
+[http://localhost/testpath](http://localhost/testpath) 
+
+Well done, you can now access your pod via the ingress.
+
+
+## Cleanup
+
+When you are all done with your test cluster, you can clean it up easily with the following command.
+
+```bash
+kind delete cluster --name mycluster
+```
+
 
 > "But I want a custom page of my own design"
 
