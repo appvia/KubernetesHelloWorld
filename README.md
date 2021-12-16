@@ -83,7 +83,7 @@ First we need a little configuration to prepare our new Kubernetes node. Make a 
 # Save this to 'kind.config.yaml'
 
 kind: Cluster
-apiVersion: kind.sigs.k8s.io/v1alpha3
+apiVersion: kind.x-k8s.io/v1alpha4
 nodes:
 - role: control-plane
   extraPortMappings:
@@ -104,6 +104,12 @@ It only takes a few minutes, and after this runs you should see  a friendly mess
 ![image created cluster](images/1_created_cluster.png)
 
 As the output says, the cluster is up and your `kubectl` command configuration is already set to talk to the cluster.
+
+You can get more information about the cluster by running:
+
+```bash
+kubectl cluster-info --context kind-mycluster
+```
 
 ## Deploy an application
 
